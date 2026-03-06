@@ -11,12 +11,10 @@ import { BehaviorSubject, lastValueFrom, Observable, take } from 'rxjs';
 })
 export class ListComponent implements OnInit {
   students: Student[] = [];
-
+  
   constructor(private readonly studentService: StudentService) { }
-
+  
   async ngOnInit() {
-
     this.students = await lastValueFrom(this.studentService.getStudents$());
-
   }
 }
