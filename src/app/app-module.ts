@@ -1,20 +1,21 @@
-import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
+// Moduels
 import { BrowserModule } from '@angular/platform-browser';
+import { MaterialModule } from './modules/material-module';
+import { AppRoutingModule } from './modules/app-routing-module';
+import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing-module';
+// Components
 import { App } from './app';
+import { HeaderComponent } from './layout/header/header.component';
+import { ListComponent } from './components/Student/list/list.component';
 
 @NgModule({
-  declarations: [
-    App
-  ],
+  declarations: [App, ListComponent, HeaderComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [
-    provideBrowserGlobalErrorListeners(),
-  ],
-  bootstrap: [App]
+    MaterialModule,
+    AppRoutingModule],
+  providers: [provideBrowserGlobalErrorListeners()],
+  bootstrap: [App],
 })
-export class AppModule { }
+export class AppModule { } 
