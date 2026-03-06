@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { StudentService } from '../../../services/student.service';
+import { Student } from '../../../models/student.model';
+import { BehaviorSubject, lastValueFrom, Observable, take } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -6,27 +9,12 @@ import { Component } from '@angular/core';
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
-export class ListComponent {
-  displayedColumns: string[] = ['id', 'name', 'birthDate', 'email'];
-  dataSource = ELEMENT_DATA;
+export class ListComponent implements OnInit {
+  students: Student[] = [];
+  
+  constructor(private readonly studentService: StudentService) { }
+  
+  async ngOnInit() {
+    this.students = await lastValueFrom(this.studentService.getStudents$());
+  }
 }
-
-export interface students {
-  id: number;
-  name: string;
-  birthDate: Date;
-  email: string;
-}
-
-const ELEMENT_DATA: students[] = [
-  { id: 1, name: 'Hydrogen', birthDate: new Date('2000-01-01'), email: 'test@email.com' },
-  { id: 2, name: 'Helium', birthDate: new Date('2000-01-01'), email: 'test@email.com' },
-  { id: 3, name: 'Lithium', birthDate: new Date('2000-01-01'), email: 'test@email.com' },
-  { id: 4, name: 'Beryllium', birthDate: new Date('2000-01-01'), email: 'test@email.com' },
-  { id: 5, name: 'Boron', birthDate: new Date('2000-01-01'), email: 'test@email.com' },
-  { id: 6, name: 'Carbon', birthDate: new Date('2000-01-01'), email: 'test@email.com' },
-  { id: 7, name: 'Nitrogen', birthDate: new Date('2000-01-01'), email: 'test@email.com' },
-  { id: 8, name: 'Oxygen', birthDate: new Date('2000-01-01'), email: 'test@email.com' },
-  { id: 9, name: 'Fluorine', birthDate: new Date('2000-01-01'), email: 'test@email.com' },
-  { id: 10, name: 'Neon', birthDate: new Date('2000-01-01'), email: 'test@email.com' },
-];

@@ -8,14 +8,12 @@ import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { App } from './app';
 import { HeaderComponent } from './layout/header/header.component';
 import { ListComponent } from './components/Student/list/list.component';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [App, ListComponent, HeaderComponent],
-  imports: [
-    BrowserModule,
-    MaterialModule,
-    AppRoutingModule],
-  providers: [provideBrowserGlobalErrorListeners()],
+  imports: [BrowserModule, MaterialModule, AppRoutingModule],
+  providers: [provideBrowserGlobalErrorListeners(), provideHttpClient()],
   bootstrap: [App],
 })
 export class AppModule { } 
